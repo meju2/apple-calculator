@@ -1,32 +1,32 @@
-const valueEl = document.querySelector('.value');
-const acEl = document.querySelector('.ac');
-const pmEl = document.querySelector('.pm');
-const percentEl = document.querySelector('.percent');
-const additionEl = document.querySelector('.addition');
-const subtractionEl = document.querySelector('.subtraction');
-const multiplicationEl = document.querySelector('.multiplication');
-const divisionEl = document.querySelector('.division');
-const equalEl = document.querySelector('.equal');
-const decimalEl = document.querySelector('.decimal');
-const number0El = document.querySelector('.number-0');
-const number1El = document.querySelector('.number-1');
-const number2El = document.querySelector('.number-2');
-const number3El = document.querySelector('.number-3');
-const number4El = document.querySelector('.number-4');
-const number5El = document.querySelector('.number-5');
-const number6El = document.querySelector('.number-6');
-const number7El = document.querySelector('.number-7');
-const number8El = document.querySelector('.number-8');
-const number9El = document.querySelector('.number-9');
-const numberElArray = [
-  number0El, number1El, number2El, number3El, number4El,
-  number5El, number6El, number7El, number8El, number9El
+const valueElement = document.querySelector('.value');
+const acElement = document.querySelector('.ac');
+const pmElement = document.querySelector('.pm');
+const percentElement = document.querySelector('.percent');
+const additionElement = document.querySelector('.addition');
+const subtractionElement = document.querySelector('.subtraction');
+const multiplicationElement = document.querySelector('.multiplication');
+const divisionElement = document.querySelector('.division');
+const equalElement = document.querySelector('.equal');
+const decimalElement = document.querySelector('.decimal');
+const number0Element = document.querySelector('.number-0');
+const number1Element = document.querySelector('.number-1');
+const number2Element = document.querySelector('.number-2');
+const number3Element = document.querySelector('.number-3');
+const number4Element = document.querySelector('.number-4');
+const number5Element = document.querySelector('.number-5');
+const number6Element = document.querySelector('.number-6');
+const number7Element = document.querySelector('.number-7');
+const number8Element = document.querySelector('.number-8');
+const number9Element = document.querySelector('.number-9');
+const numberElementArray = [
+  number0Element, number1Element, number2Element, number3Element, number4Element,
+  number5Element, number6Element, number7Element, number8Element, number9Element
 ];
 
 let valueStrInMemory = null;
 let operatorInMemory = null;
 
-const getValueAsStr = () => valueEl.textContent.split(',').join('');
+const getValueAsStr = () => valueElement.textContent.split(',').join('');
 
 const getValueAsNum = () => {
   return parseFloat(getValueAsStr());
@@ -34,16 +34,16 @@ const getValueAsNum = () => {
 
 const setStrAsValue = (valueStr) => {
   if (valueStr[valueStr.length - 1] === '.') {
-    valueEl.textContent += '.';
+    valueElement.textContent += '.';
     return;
   }
 
   const [wholeNumStr, decimalStr] = valueStr.split('.');
   if (decimalStr) {
-    valueEl.textContent =
+    valueElement.textContent =
       parseFloat(wholeNumStr).toLocaleString() + '.' + decimalStr;
   } else {
-    valueEl.textContent = parseFloat(wholeNumStr).toLocaleString();
+    valueElement.textContent = parseFloat(wholeNumStr).toLocaleString();
   }
 };
 
@@ -87,12 +87,13 @@ const handleOperatorClick = (operation) => {
   setStrAsValue('0');
 };
 
-acEl.addEventListener('click', () => {
+acElement.addEventListener('click', () => {
   setStrAsValue('0');
   valueStrInMemory = null;
   operatorInMemory = null;
 });
-pmEl.addEventListener('click', () => {
+
+pmElement.addEventListener('click', () => {
   const currentValueNum = getValueAsNum();
   const currentValueStr = getValueAsStr();
 
@@ -106,7 +107,7 @@ pmEl.addEventListener('click', () => {
     setStrAsValue(currentValueStr.substring(1));
   }
 });
-percentEl.addEventListener('click', () => {
+percentElement.addEventListener('click', () => {
   const currentValueNum = getValueAsNum();
   const newValueNum = currentValueNum / 100;
   setStrAsValue(newValueNum.toString());
@@ -114,19 +115,19 @@ percentEl.addEventListener('click', () => {
   operatorInMemory = null;
 });
 
-additionEl.addEventListener('click', () => {
+additionElement.addEventListener('click', () => {
   handleOperatorClick('addition');
 });
-subtractionEl.addEventListener('click', () => {
+subtractionElement.addEventListener('click', () => {
   handleOperatorClick('subtraction');
 });
-multiplicationEl.addEventListener('click', () => {
+multiplicationElement.addEventListener('click', () => {
   handleOperatorClick('multiplication');
 });
-divisionEl.addEventListener('click', () => {
+divisionElement.addEventListener('click', () => {
   handleOperatorClick('division');
 });
-equalEl.addEventListener('click', () => {
+equalElement.addEventListener('click', () => {
   if (valueStrInMemory) {
     setStrAsValue(getResultOfOperationAsStr());
     valueStrInMemory = null;
@@ -134,13 +135,13 @@ equalEl.addEventListener('click', () => {
   }
 });
 
-for (let i=0; i < numberElArray.length; i++) {
-  const numberEl = numberElArray[i];
-  numberEl.addEventListener('click', () => {
-    handleNumberClick(i.toString());
+for (let index = 0; index < numberElementArray.length; index++) {
+  const numberElement = numberElementArray[index];
+  numberElement.addEventListener('click', () => {
+    handleNumberClick(index.toString());
   });
 }
-decimalEl.addEventListener('click', () => {
+decimalElement.addEventListener('click', () => {
   const currentValueStr = getValueAsStr();
   if (!currentValueStr.includes('.')) {
     setStrAsValue(currentValueStr + '.');
